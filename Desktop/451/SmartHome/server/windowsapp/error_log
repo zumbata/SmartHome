@@ -1,0 +1,14 @@
+[11-Feb-2018 23:01:35 Europe/Sofia] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home/dimivsbq/smarthome.dimitarkostov.eu/windowsapp/login.php on line 20
+[11-Feb-2018 23:02:41 Europe/Sofia] PHP Warning:  include(database_connect.php): failed to open stream: No such file or directory in /home/dimivsbq/smarthome.dimitarkostov.eu/windowsapp/login.php on line 2
+[11-Feb-2018 23:02:41 Europe/Sofia] PHP Warning:  include(): Failed opening 'database_connect.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/dimivsbq/smarthome.dimitarkostov.eu/windowsapp/login.php on line 2
+[11-Feb-2018 23:02:41 Europe/Sofia] PHP Fatal error:  Call to a member function query() on null in /home/dimivsbq/smarthome.dimitarkostov.eu/windowsapp/login.php on line 7
+[12-Feb-2018 01:00:40 Europe/Sofia] PHP Parse error:  syntax error, unexpected ')' in /home/dimivsbq/smarthome.dimitarkostov.eu/windowsapp/login.php on line 8
+[12-Feb-2018 01:01:05 Europe/Sofia] PHP Parse error:  syntax error, unexpected ')' in /home/dimivsbq/smarthome.dimitarkostov.eu/windowsapp/login.php on line 8
+[13-Feb-2018 15:41:44 Europe/Sofia] PHP Warning:  mysqli::query(): Empty query in /home/dimivsbq/smarthome.dimitarkostov.eu/windowsapp/register_device.php on line 6
+[13-Feb-2018 15:42:35 Europe/Sofia] PHP Warning:  mysqli::query(): Empty query in /home/dimivsbq/smarthome.dimitarkostov.eu/windowsapp/register_device.php on line 6
+[13-Feb-2018 15:42:37 Europe/Sofia] PHP Warning:  mysqli::query(): Empty query in /home/dimivsbq/smarthome.dimitarkostov.eu/windowsapp/register_device.php on line 6
+[13-Feb-2018 15:45:53 Europe/Sofia] PHP Warning:  mysqli::query(): Empty query in /home/dimivsbq/smarthome.dimitarkostov.eu/windowsapp/register_device.php on line 6
+[13-Feb-2018 15:47:50 Europe/Sofia] PHP Warning:  mysqli::query(): Empty query in /home/dimivsbq/smarthome.dimitarkostov.eu/windowsapp/register_device.php on line 6
+[13-Feb-2018 19:29:59 Europe/Sofia] PHP Warning:  mysqli::query(): Empty query in /home/dimivsbq/smarthome.dimitarkostov.eu/windowsapp/register_device.php on line 6
+[13-Feb-2018 19:30:40 Europe/Sofia] PHP Fatal error:  Call to undefined method mysqli::fetch_assoc() in /home/dimivsbq/smarthome.dimitarkostov.eu/windowsapp/register_device.php on line 9
+[13-Feb-2018 19:33:06 Europe/Sofia] PHP Warning:  mysqli_result::fetch_assoc() expects exactly 0 parameters, 1 given in /home/dimivsbq/smarthome.dimitarkostov.eu/windowsapp/register_device.php on line 9

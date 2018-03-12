@@ -1,0 +1,13 @@
+D:\Source\SmartHome\SmartHome\SmartHome\bin\Release\netstandard2.0\SmartHome.deps.json
+D:\Source\SmartHome\SmartHome\SmartHome\bin\Release\netstandard2.0\SmartHome.dll
+D:\Source\SmartHome\SmartHome\SmartHome\bin\Release\netstandard2.0\SmartHome.pdb
+D:\Source\SmartHome\SmartHome\SmartHome\obj\Release\netstandard2.0\SmartHome.csproj.CoreCompileInputs.cache
+D:\Source\SmartHome\SmartHome\SmartHome\obj\Release\netstandard2.0\SmartHome.App.xaml.g.cs
+D:\Source\SmartHome\SmartHome\SmartHome\obj\Release\netstandard2.0\SmartHome.Information.xaml.g.cs
+D:\Source\SmartHome\SmartHome\SmartHome\obj\Release\netstandard2.0\SmartHome.Login.xaml.g.cs
+D:\Source\SmartHome\SmartHome\SmartHome\obj\Release\netstandard2.0\SmartHome.Main_Page.xaml.g.cs
+D:\Source\SmartHome\SmartHome\SmartHome\obj\Release\netstandard2.0\SmartHome.RegisterButton.xaml.g.cs
+D:\Source\SmartHome\SmartHome\SmartHome\obj\Release\netstandard2.0\SmartHome.AssemblyInfoInputs.cache
+D:\Source\SmartHome\SmartHome\SmartHome\obj\Release\netstandard2.0\SmartHome.AssemblyInfo.cs
+D:\Source\SmartHome\SmartHome\SmartHome\obj\Release\netstandard2.0\SmartHome.dll
+D:\Source\SmartHome\SmartHome\SmartHome\obj\Release\netstandard2.0\SmartHome.pdb

@@ -1,0 +1,3 @@
+SmartHome, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  SmartHome.App.xaml
+  SmartHome.Login_Page.xaml

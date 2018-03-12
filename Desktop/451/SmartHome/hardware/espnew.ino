@@ -1,0 +1,404 @@
+#include <SoftwareSerial.h>
+#include <EEPROM.h>
+#include <BH1750FVI.h>
+#include <MQ135.h>
+//#include "I2Cdev.h"
+//#include "MPU6050.h"
+#include <DHT.h>
+//#include <Wire.h>
+
+#define IRpin 2
+#define MAXPULSE 65000
+#define RESOLUTION 20
+#define LED_IR_REC 4
+#define MQ135_PIN A0
+#define DHT_PIN 3
+#define RESET_PIN 8
+#define EEPROM_MIN_ADDR 0
+#define EEPROM_MAX_ADDR 511
+
+unsigned long int pulses[100][2];
+unsigned long int a[100][2];
+unsigned int currentpulse = 0;
+int left_led = 5, right_led = 7, up_led = 6;
+float hum, temp_cel, temp_far, heat_index_cel, heat_index_far, gas_ppm;
+//int lux;
+//int x, y, z;
+
+SoftwareSerial esp8266(10, 11);
+DHT dht(DHT_PIN, DHT11);
+//MPU6050 motion;
+//BH1750FVI light;
+MQ135 gas = MQ135(MQ135_PIN);
+
+String username = "zumbata";
+String device_name = "Living_room";
+
+void setup()
+{
+  digitalWrite(RESET_PIN, HIGH);
+  Serial.begin(9600);
+  esp8266.begin(9600);
+
+  pinMode(RESET_PIN, OUTPUT);
+  pinMode(LED_IR_REC, OUTPUT);
+  //Wire.begin();
+  //motion.initialize();
+  dht.begin();
+  //light.begin();
+  //light.setMode(Continuously_High_Resolution_Mode);
+  String respp = sendDataToESP("AT+CWJAP?\r\n", 3000);
+  if (respp.indexOf("No AP") != -1)
+  {
+    Serial.println(connectToWiFi());
+    char cha[30], cha1[30];
+    username.toCharArray(cha, 30);
+    device_name.toCharArray(cha1, 30);
+    eeprom_write_string(0, cha);
+    eeprom_write_string(31, cha1);
+  }
+  if (username == "")
+  {
+    char cha[30];
+    eeprom_read_string(0, cha, 30);
+    String str(cha);
+    username = str;
+  }
+  if (device_name == "")
+  {
+    char cha1[30];
+    eeprom_read_string(31, cha1, 30);
+    String str1(cha1);
+    device_name = str1;
+  }
+  Serial.println(username + " " + device_name);
+}
+
+void loop()
+{
+  Serial.println(sendDataToESP("AT+CIPSTART=\"TCP\",\"smarthome.dimitarkostov.eu\",80\r\n", 500));
+  sendSensorDataToServer();
+  Serial.println(sendDataToESP("AT+CIPSTART=\"TCP\",\"smarthome.dimitarkostov.eu\",80\r\n", 500));
+  sendIRRequestToServer();
+  Serial.println(sendDataToESP("AT+CIPSTART=\"TCP\",\"smarthome.dimitarkostov.eu\",80\r\n", 500));
+  readIRRequestToServer();
+}
+
+void sendSensorDataToServer()
+{
+  String data = getSensorData();
+  short int data_len = data.length() + 2;
+  String comm = "AT+CIPSEND=";
+  comm += data_len;
+  comm += "\r\n";
+  Serial.println(sendDataToESP(comm, 500));
+  delay(500);
+  Serial.println(sendDataToESP(data + "\r\n", 1000));
+  Serial.println("Success!");
+}
+
+void sendIRRequestToServer()
+{
+  String req = "GET http://www.smarthome.dimitarkostov.eu/send_ir.php?username=" + username + "&device_name=" + device_name;
+  String comm = "AT+CIPSEND=";
+  comm += req.length() + 2;
+  comm += "\r\n";
+  Serial.println(sendDataToESP(comm, 500));
+  delay(500);
+  String resp = sendDataToESP(req + "\r\n", 1000);
+  Serial.println(resp);
+  resp.replace(resp.substring(0, resp.indexOf(":") + 1), "");
+  if (resp.indexOf("No data") != -1 || resp.indexOf("Error") != -1)
+    return;
+  int in = resp.indexOf(" ");
+  int n = resp.substring(0, in).toInt();
+  char c = resp[in + 1];
+  resp.replace(resp.substring(0, in + 3), "");
+  resp.replace("CLOSED", "");
+  for(int i=0; i < n; i++)
+  {
+    a[i][0] = resp.substring(0, resp.indexOf(" ")).toInt();
+    resp.remove(0, resp.indexOf(" "));
+    a[i][1] = resp.substring(0, resp.indexOf(" ")).toInt();
+    resp.remove(0, resp.indexOf(" "));
+  }
+  for(int i = 0; i<n; i++)
+  {
+    Serial.print(a[i][0]);
+    Serial.print(" ");
+    Serial.println(a[i][1]);
+  }
+  switch (c)
+  {
+    case 'l': sendIR(n, left_led); break;
+    case 'r': sendIR(n, right_led); break;
+    case 'u': sendIR(n, up_led); break;
+  }
+  Serial.println("Success!");
+}
+
+void readIRRequestToServer()
+{
+  String req = "GET http://www.smarthome.dimitarkostov.eu/read_ir.php?username=" + username + "&device_name=" + device_name;
+  String comm = "AT+CIPSEND=";
+  comm += req.length() + 2;
+  comm += "\r\n";
+  Serial.println(sendDataToESP(comm, 500));
+  delay(500);
+  String resp = sendDataToESP(req + "\r\n", 1000);
+  Serial.println(resp);
+  resp.replace(resp.substring(0, resp.indexOf(":") + 1), "");
+  if (resp.indexOf("No data") != -1 || resp.indexOf("Error") != -1)
+    return;
+  byte id = resp.substring(0, resp.indexOf("#")).toInt();
+  readIR();
+  int cur = currentpulse;
+  currentpulse = 0;
+  digitalWrite(LED_IR_REC, LOW);
+  String result = "";
+  result += pulses[0][0];
+  result += "*";
+  result += pulses[0][1];
+  for (int i = 1; i < cur; i++)
+  {
+    result += "*";
+    result += pulses[i][0];
+    result += "*";
+    result += pulses[i][1];
+  }
+  Serial.println(result);
+  delay(500);
+  Serial.println(sendDataToESP("AT+CIPSTART=\"TCP\",\"smarthome.dimitarkostov.eu\",80\r\n", 500));
+  req = "GET http://www.smarthome.dimitarkostov.eu/read_ir_send_data.php?username=" + username + "&device_name=" + device_name + "&button_id=" + id + "&data=" + result;
+  comm = "AT+CIPSEND=";
+  comm += req.length() + 2;
+  comm += "\r\n";
+  Serial.println(sendDataToESP(comm, 500));
+  delay(500);
+  resp = sendDataToESP(req + "\r\n", 1000);
+  Serial.println(resp);
+  if (resp.indexOf("Error") != -1)
+  {
+    for (int i = 0; i < 20; i++)
+    {
+      digitalWrite(LED_IR_REC, HIGH);
+      delay(200);
+      digitalWrite(LED_IR_REC, LOW);
+      delay(200);
+    }
+    digitalWrite(RESET_PIN, LOW);
+  }
+  Serial.println("Success!");
+}
+
+String getValue(String data, char separator, int index)
+{
+  int found = 0;
+  int strIndex[] = {0, -1};
+  int maxIndex = data.length() - 1;
+
+  for (int i = 0; i <= maxIndex && found <= index; i++) {
+    if (data.charAt(i) == separator || i == maxIndex) {
+      found++;
+      strIndex[0] = strIndex[1] + 1;
+      strIndex[1] = (i == maxIndex) ? i + 1 : i;
+    }
+  }
+
+  return found > index ? data.substring(strIndex[0], strIndex[1]) : "";
+}
+
+String getSensorData()
+{
+  hum = dht.readHumidity();
+  temp_cel = dht.readTemperature(false);
+  temp_far = dht.readTemperature(true);
+  heat_index_cel = dht.computeHeatIndex(temp_cel, hum, false);
+  heat_index_far = dht.computeHeatIndex(temp_far, hum, true);
+  //lux = light.getAmbientLight();
+  gas_ppm = gas.getPPM();
+  //motion.getAcceleration(&x,&y,&z);
+  String data = "GET http://smarthome.dimitarkostov.eu/sensors.php?";
+  data += "username=";
+  data += username;
+  data += "&device_name=";
+  data += device_name;
+  data += "&temp_cel=";
+  data += temp_cel;
+  data += "&temp_far=";
+  data += temp_far;
+  data += "&heat_index_cel=";
+  data += heat_index_cel;
+  data += "&heat_index_far=";
+  data += heat_index_far;
+  data += "&hum=";
+  data += hum;
+  data += "&lux=";
+  data += 999;
+  data += "&gas_ppm=";
+  data += gas_ppm;
+  return data;
+}
+
+String connectToWiFi()
+{
+  String r = waitForFirstData();
+  byte i = r.indexOf("*");
+  byte k = r.indexOf("#");
+  byte l = r.indexOf("@");
+  String ssid = "";
+  for (int j = 0; j < i; j++)
+  {
+    char c = r[j];
+    ssid += c;
+  }
+  String pass = "";
+  for (int j = i + 1; j < k; j++)
+  {
+    char c = r[j];
+    pass += c;
+  }
+  for (int j = k + 1; j < l; j++)
+  {
+    char c = r[j];
+    username += c;
+  }
+  for (int j = l + 1; j < r.length(); j++)
+  {
+    char c = r[j];
+    device_name += c;
+  }
+  String command = "AT+CWJAP_DEF=\"";
+  command += ssid;
+  command += "\",\"";
+  command += pass;
+  command += "\"\r\n";
+  String resp = sendDataToESP(command, 3000);
+  return resp;
+}
+
+String waitForFirstData()
+{
+  String r1 = "";
+  while (!Serial.available())
+  {;}
+  r1 = Serial.readString();
+  return r1;
+}
+
+String sendDataToESP(String command, const int timeout)
+{
+  String r2 = "";
+  esp8266.print(command);
+  long int time = millis();
+  while ( (time + timeout) > millis())
+  {
+    while (esp8266.available())
+    {
+      char c = esp8266.read();
+      r2 += c;
+    }
+  }
+  return r2;
+}
+
+bool eeprom_is_addr_ok(int addr) {
+  return ((addr >= EEPROM_MIN_ADDR) && (addr <= EEPROM_MAX_ADDR));
+}
+
+bool eeprom_write_bytes(int startAddr, const byte * array, int numBytes) {
+  int i;
+  if (!eeprom_is_addr_ok(startAddr) || !eeprom_is_addr_ok(startAddr + numBytes))
+    return false;
+  for (i = 0; i < numBytes; i++)
+    EEPROM.write(startAddr + i, array[i]);
+  return true;
+}
+
+bool eeprom_write_string(int addr, const char * string) {
+
+  int numBytes;
+  numBytes = strlen(string) + 1;
+  return eeprom_write_bytes(addr, (const byte * ) string, numBytes);
+}
+
+bool eeprom_read_string(int addr, char* buffer, int bufSize) {
+  byte ch;
+  int bytesRead;
+  if (!eeprom_is_addr_ok(addr)) {
+    return false;
+  }
+
+  if (bufSize == 0) {
+    return false;
+  }
+
+  if (bufSize == 1) {
+    buffer[0] = 0;
+    return true;
+  }
+  bytesRead = 0;
+  ch = EEPROM.read(addr + bytesRead);
+  buffer[bytesRead] = ch;
+  bytesRead++;
+  while ((ch != 0x00) && (bytesRead < bufSize) && ((addr + bytesRead) <= EEPROM_MAX_ADDR)) {
+    ch = EEPROM.read(addr + bytesRead);
+    buffer[bytesRead] = ch;
+    bytesRead++;
+  }
+  if ((ch != 0x00) && (bytesRead >= 1)) {
+    buffer[bytesRead - 1] = 0;
+  }
+  return true;
+}
+
+void readIR()
+{
+  digitalWrite(LED_IR_REC, HIGH);
+  while (true)
+  {
+    uint16_t highpulse, lowpulse;
+    highpulse = lowpulse = 0;
+    while (digitalRead(IRpin)) {
+      highpulse++;
+      delayMicroseconds(RESOLUTION);
+      if ((highpulse >= MAXPULSE) && (currentpulse != 0)) {
+        return;
+      }
+    }
+    pulses[currentpulse][0] = highpulse;
+    while (!digitalRead(IRpin)) {
+      lowpulse++;
+      delayMicroseconds(RESOLUTION);
+      if ((lowpulse >= MAXPULSE)  && (currentpulse != 0)) {
+        return;
+      }
+    }
+    pulses[currentpulse][1] = lowpulse;
+    currentpulse++;
+  }
+}
+
+void pulseIR(long microsecs, int IRledPin)
+{
+  cli();
+  while (microsecs > 0)
+  {
+    digitalWrite(IRledPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(IRledPin, LOW);
+    delayMicroseconds(10);
+    microsecs -= 26;
+  }
+  sei();
+}
+
+void sendIR(int n, int led)
+{
+  for (int i = 0; i < n; i++)
+  {
+    delayMicroseconds(a[i][0]);
+    pulseIR(a[i][1], led);
+  }
+}
+

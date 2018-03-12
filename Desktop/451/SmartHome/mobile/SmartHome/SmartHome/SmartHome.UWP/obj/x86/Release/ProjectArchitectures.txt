@@ -1,0 +1,1 @@
+D:\Source\SmartHome\SmartHome\SmartHome.UWP\SmartHome.UWP.csproj;x86

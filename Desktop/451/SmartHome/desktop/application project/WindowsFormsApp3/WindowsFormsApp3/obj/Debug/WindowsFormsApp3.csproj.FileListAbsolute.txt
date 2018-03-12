@@ -1,0 +1,26 @@
+C:\Users\zumbata\source\repos\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.exe.config
+C:\Users\zumbata\source\repos\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.exe
+C:\Users\zumbata\source\repos\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.pdb
+C:\Users\zumbata\source\repos\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csprojResolveAssemblyReference.cache
+C:\Users\zumbata\source\repos\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Login.resources
+C:\Users\zumbata\source\repos\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Register.resources
+C:\Users\zumbata\source\repos\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Home.resources
+C:\Users\zumbata\source\repos\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Properties.Resources.resources
+C:\Users\zumbata\source\repos\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.GenerateResource.Cache
+C:\Users\zumbata\source\repos\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.CoreCompileInputs.cache
+C:\Users\zumbata\source\repos\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.exe
+C:\Users\zumbata\source\repos\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.pdb
+C:\Users\zumbata\source\repos\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Main.resources
+C:\Users\zumbata\Desktop\451\SmartHome\desktop\application project\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.exe.config
+C:\Users\zumbata\Desktop\451\SmartHome\desktop\application project\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.exe
+C:\Users\zumbata\Desktop\451\SmartHome\desktop\application project\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.pdb
+C:\Users\zumbata\Desktop\451\SmartHome\desktop\application project\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csprojResolveAssemblyReference.cache
+C:\Users\zumbata\Desktop\451\SmartHome\desktop\application project\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Login.resources
+C:\Users\zumbata\Desktop\451\SmartHome\desktop\application project\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Main.resources
+C:\Users\zumbata\Desktop\451\SmartHome\desktop\application project\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Register.resources
+C:\Users\zumbata\Desktop\451\SmartHome\desktop\application project\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Home.resources
+C:\Users\zumbata\Desktop\451\SmartHome\desktop\application project\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Properties.Resources.resources
+C:\Users\zumbata\Desktop\451\SmartHome\desktop\application project\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.GenerateResource.Cache
+C:\Users\zumbata\Desktop\451\SmartHome\desktop\application project\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.CoreCompileInputs.cache
+C:\Users\zumbata\Desktop\451\SmartHome\desktop\application project\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.exe
+C:\Users\zumbata\Desktop\451\SmartHome\desktop\application project\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.pdb

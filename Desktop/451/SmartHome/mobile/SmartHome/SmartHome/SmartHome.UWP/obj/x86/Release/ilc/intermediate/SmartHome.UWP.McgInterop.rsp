@@ -1,0 +1,43 @@
+/debug:pdbonly
+/nowarn:0436;0618;1668;1685;1701;1702
+/debug+
+/nostdlib+
+/optimize+
+/out:"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\intermediate\SmartHome.UWP.McgInterop.dll"
+/pdb:"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\intermediate\SmartHome.UWP.McgInterop.pdb"
+/platform:x86
+/warnaserror+
+/unsafe
+/nologo
+/target:library
+/define:MCG_PRE_BUILD
+/r:"C:\Program Files (x86)\Microsoft SDKs\NuGetPackagesFallback\microsoft.net.native.sharedlibrary-x86\2.0.0\tools\SharedLibrary\ret\AnalysisILToc\System.Private.CoreLib.iltoc"
+/r:"C:\Users\raiko\.nuget\packages\microsoft.net.native.compiler\2.0.0\tools\x86\ilc\lib\Private\System.Private.CoreLib.InteropServices.dll"
+/r:"C:\Program Files (x86)\Microsoft SDKs\NuGetPackagesFallback\microsoft.net.native.sharedlibrary-x86\2.0.0\tools\SharedLibrary\ret\AnalysisILToc\System.Private.Interop.iltoc"
+/r:"C:\Program Files (x86)\Microsoft SDKs\NuGetPackagesFallback\microsoft.net.native.sharedlibrary-x86\2.0.0\tools\SharedLibrary\ret\AnalysisILToc\System.Private.Uri.iltoc"
+/r:"C:\Users\raiko\.nuget\packages\microsoft.net.native.compiler\2.0.0\tools\x86\ilc\lib\Private\System.Private.CompilerServices.ICastable.dll"
+/r:"C:\Users\raiko\.nuget\packages\microsoft.net.native.compiler\2.0.0\tools\x86\ilc\lib\Private\System.Private.DispatchProxy.dll"
+/r:"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\in\System.Reflection.DispatchProxy.dll"
+/r:"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\in\System.Reflection.dll"
+/r:"C:\Program Files (x86)\Microsoft SDKs\NuGetPackagesFallback\microsoft.net.native.sharedlibrary-x86\2.0.0\tools\SharedLibrary\ret\AnalysisILToc\System.Runtime.iltoc"
+/r:"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\in\System.Runtime.InteropServices.dll"
+/r:"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\in\System.Runtime.InteropServices.WindowsRuntime.dll"
+/r:"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\in\System.Numerics.Vectors.dll"
+/r:"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\in\System.Threading.dll"
+/r:"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\in\System.Diagnostics.Debug.dll"
+/r:"C:\Program Files (x86)\Microsoft SDKs\NuGetPackagesFallback\microsoft.net.native.sharedlibrary-x86\2.0.0\tools\SharedLibrary\ret\AnalysisILToc\System.Runtime.Extensions.iltoc"
+/r:"C:\Program Files (x86)\Microsoft SDKs\NuGetPackagesFallback\microsoft.net.native.sharedlibrary-x86\2.0.0\tools\SharedLibrary\ret\AnalysisILToc\System.Collections.iltoc"
+/r:"C:\Program Files (x86)\Microsoft SDKs\NuGetPackagesFallback\microsoft.net.native.sharedlibrary-x86\2.0.0\tools\SharedLibrary\ret\AnalysisILToc\System.ObjectModel.iltoc"
+/r:"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\in\System.Runtime.WindowsRuntime.dll"
+/r:"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\in\System.Runtime.WindowsRuntime.UI.Xaml.dll"
+/r:"C:\Users\raiko\.nuget\packages\microsoft.net.native.compiler\2.0.0\tools\x86\ilc\lib\Private\System.Private.CoreLib.Augments.dll"
+/r:"C:\Program Files (x86)\Microsoft SDKs\NuGetPackagesFallback\microsoft.net.native.sharedlibrary-x86\2.0.0\tools\SharedLibrary\ret\AnalysisILToc\System.Private.SharedLibrary.Interop.Generated.iltoc"
+/r:"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\intermediate\System.Private.SmartHome.UWP.Generated.dll"
+"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\intermediate\SmartHome.UWP.McgInterop\Adapters.g.cs"
+"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\intermediate\SmartHome.UWP.McgInterop\AssemblyInfo.g.cs"
+"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\intermediate\SmartHome.UWP.McgInterop\Data.g.cs"
+"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\intermediate\SmartHome.UWP.McgInterop\Helpers.g.cs"
+"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\intermediate\SmartHome.UWP.McgInterop\ImplTypes.g.cs"
+"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\intermediate\SmartHome.UWP.McgInterop\PInvoke.g.cs"
+"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\intermediate\SmartHome.UWP.McgInterop\SafeTypes.g.cs"
+"D:\Source\SmartHome\SmartHome\SmartHome.UWP\obj\x86\Release\ilc\intermediate\SmartHome.UWP.McgInterop\SharedStubs.g.cs"
